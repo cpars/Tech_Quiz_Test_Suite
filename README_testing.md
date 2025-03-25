@@ -15,16 +15,6 @@ This project was built to **demonstrate Cypress testing practices** in a MERN ap
 
 ---
 
-## 🖼️ Screenshots
-
-| Start Quiz Screen | In-Progress Question | Quiz Completed |
-|-------------------|----------------------|----------------|
-| ![Start Screen](screenshots/start-quiz.png) | ![Question](screenshots/quiz-question.png) | ![Result](screenshots/quiz-complete.png) |
-
-> Add these screenshots in a `/screenshots` folder and update the file paths above if needed.
-
----
-
 ## 📽️ Walkthrough Video
 
 Watch a complete walkthrough of the Cypress Testing:
