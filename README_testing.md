@@ -29,7 +29,7 @@ This project was built to **demonstrate Cypress testing practices** in a MERN ap
 
 Watch a complete walkthrough of the Cypress Testing:
 
-📺 **Watch here**: [Tech Quiz App Testing Demo Walkthrough](https://www.youtube.com/watch?v=your-video-id)
+📺 **Watch here**: [Tech Quiz App Testing Demo Walkthrough](https://app.screencastify.com/v3/watch/HYrTdOVLevtyYdPC9uSE)
 
 ---
 
@@ -80,12 +80,9 @@ cd ../server && npm install
 ### 🏁 Start Servers
 
 ```bash
-# from project root
-npm run dev
+npm run start:dev
 ```
 
-- Frontend: `http://localhost:3000`
-- Backend API: `http://localhost:5000`
 
 ---
 
