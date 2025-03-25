@@ -1,91 +1,81 @@
 import Quiz from "../../client/src/components/Quiz";
 
-describe("<Quiz />", () => {
+describe("<Quiz /> Component Tests", () => {
+  // ✅ Helper function to mount with mocked data
+  const mountWithMockData = () => {
+    cy.intercept("GET", "/api/questions/random", {
+      fixture: "mockQuestions.json",
+    }).as("getQuestions");
+
+    cy.mount(<Quiz />);
+    cy.wait("@getQuestions");
+  };
+
   it("should render the Quiz component", () => {
-    // see: https://on.cypress.io/mounting-react
-    cy.mount(<Quiz />);
+    mountWithMockData();
+    cy.get('[data-cy="start-btn"]').should("exist");
   });
 
-  it("should render the start quiz button", () => {
-    cy.mount(<Quiz />);
-    cy.get('[data-cy="start-btn"]').should("have.text", "Start Quiz");
+  it("should render the Start Quiz button with correct text", () => {
+    mountWithMockData();
+    cy.get('[data-cy="start-btn"]').should("contain", "Start Quiz");
   });
 
-  it("should display a question when the start button is clicked", () => {
-    cy.mount(<Quiz />);
-    cy.get('[data-cy="start-btn"]').contains("Start Quiz").click();
-
+  it("should display the first question when Start is clicked", () => {
+    mountWithMockData();
+    cy.get('[data-cy="start-btn"]').click();
     cy.get('[data-cy="question-header"]').should("be.visible");
   });
 
-  it("should display another questions when an answer is selected", () => {
-    cy.mount(<Quiz />);
-    cy.get('[data-cy="start-btn"]').contains("Start Quiz").click();
+  it("should display the next question after selecting an answer", () => {
+    mountWithMockData();
+    cy.get('[data-cy="start-btn"]').click();
 
     cy.get('[data-cy="question-header"]')
       .invoke("text")
-      .then((initialQuestion) => {
+      .then((firstQuestion) => {
         cy.get('[data-cy="answer-btn"]').first().click();
 
         cy.get('[data-cy="question-header"]')
           .should("be.visible")
           .invoke("text")
-          .should("not.eq", initialQuestion);
+          .should("not.eq", firstQuestion);
       });
   });
 
-  it("should display quiz completed when all questions are answered", () => {
-    cy.mount(<Quiz />);
-    cy.intercept("GET", "/api/questions/random", {
-      fixture: "mockQuestions.json",
-    }).as("getQuestions");
-    cy.get('[data-cy="start-btn"]').contains("Start Quiz").click();
+  it("should display 'Quiz Completed' after answering all questions", () => {
+    mountWithMockData();
+    cy.get('[data-cy="start-btn"]').click();
 
     cy.fixture("mockQuestions.json").then((questions) => {
-      const questionCount = questions.length;
-      for (let i = 0; i < questionCount; i++) {
+      for (let i = 0; i < questions.length; i++) {
         cy.get('[data-cy="answer-btn"]').first().click();
       }
-      cy.get('[data-cy="quiz-complete"]')
-        .contains("Quiz Completed")
-        .should("be.visible");
+      cy.get('[data-cy="quiz-complete"]').should("contain", "Quiz Completed");
     });
   });
 
-  it("should display the score when the quiz is completed", () => {
-    cy.mount(<Quiz />);
-    cy.intercept("GET", "/api/questions/random", {
-      fixture: "mockQuestions.json",
-    }).as("getQuestions");
-    cy.get('[data-cy="start-btn"]').contains("Start Quiz").click();
+  it("should show the score after completing the quiz", () => {
+    mountWithMockData();
+    cy.get('[data-cy="start-btn"]').click();
 
     cy.fixture("mockQuestions.json").then((questions) => {
-      const questionCount = questions.length;
-      for (let i = 0; i < questionCount; i++) {
+      for (let i = 0; i < questions.length; i++) {
         cy.get('[data-cy="answer-btn"]').first().click();
       }
-      cy.get('[data-cy="quiz-complete"]')
-        .contains("Your score:")
-        .should("be.visible");
+      cy.get('[data-cy="quiz-complete"]').should("contain", "Your score:");
     });
   });
 
-  it("should display a button to take a new quiz after the quiz is completed", () => {
-    cy.mount(<Quiz />);
-    cy.intercept("GET", "/api/questions/random", {
-      fixture: "mockQuestions.json",
-    }).as("getQuestions");
-    cy.get('[data-cy="start-btn"]').contains("Start Quiz").click();
+  it("should show 'Take New Quiz' button after completing the quiz", () => {
+    mountWithMockData();
+    cy.get('[data-cy="start-btn"]').click();
 
     cy.fixture("mockQuestions.json").then((questions) => {
-      console.log(questions);
-      const questionCount = questions.length;
-      for (let i = 0; i < questionCount; i++) {
+      for (let i = 0; i < questions.length; i++) {
         cy.get('[data-cy="answer-btn"]').first().click();
       }
-      cy.get('[data-cy="quiz-complete"]')
-        .contains("Take New Quiz")
-        .should("be.visible");
+      cy.get('[data-cy="quiz-complete"]').should("contain", "Take New Quiz");
     });
   });
 });
