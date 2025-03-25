@@ -89,7 +89,8 @@ Choose either **E2E Testing** or **Component Testing** from the UI.
 ### 📜 Run Headlessly
 
 ```bash
-npx cypress run
+# Run E2E and Component Headlessly
+npm run test:all
 ```
 
 ---
@@ -99,7 +100,6 @@ npx cypress run
 Create a `.env` file in `/server`:
 
 ```
-PORT=5000
 MONGO_URI=mongodb+srv://your-db-connection
 ```
 
@@ -123,16 +123,6 @@ Located at `cypress/fixtures/mockQuestions.json`
 ]
 ```
 
----
-
-## 📈 Future Improvements
-
-- Admin panel to manage questions
-- Quiz difficulty levels
-- User authentication & saved results
-- Visual animations between quiz steps
-
----
 
 ## 📝 License
 
