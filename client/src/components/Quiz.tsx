@@ -1,6 +1,6 @@
-import { useState, } from 'react';
-import type { Question } from '../models/Question.js';
-import { getQuestions } from '../services/questionApi.js';
+import { useState } from "react";
+import type { Question } from "../models/Question.js";
+import { getQuestions } from "../services/questionApi.js";
 
 const Quiz = () => {
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -14,7 +14,7 @@ const Quiz = () => {
       const questions = await getQuestions();
 
       if (!questions) {
-        throw new Error('something went wrong!');
+        throw new Error("something went wrong!");
       }
 
       setQuestions(questions);
@@ -22,6 +22,10 @@ const Quiz = () => {
       console.error(err);
     }
   };
+
+  // Checking the output of the questions array
+  console.log(questions);
+  console.log(questions.length);
 
   const handleAnswerClick = (isCorrect: boolean) => {
     if (isCorrect) {
@@ -47,7 +51,11 @@ const Quiz = () => {
   if (!quizStarted) {
     return (
       <div className="p-4 text-center">
-        <button className="btn btn-primary d-inline-block mx-auto" onClick={handleStartQuiz}>
+        <button
+          className="btn btn-primary d-inline-block mx-auto"
+          data-cy="start-btn"
+          onClick={handleStartQuiz}
+        >
           Start Quiz
         </button>
       </div>
@@ -56,12 +64,15 @@ const Quiz = () => {
 
   if (quizCompleted) {
     return (
-      <div className="card p-4 text-center">
+      <div data-cy="quiz-complete" className="card p-4 text-center">
         <h2>Quiz Completed</h2>
         <div className="alert alert-success">
           Your score: {score}/{questions.length}
         </div>
-        <button className="btn btn-primary d-inline-block mx-auto" onClick={handleStartQuiz}>
+        <button
+          className="btn btn-primary d-inline-block mx-auto"
+          onClick={handleStartQuiz}
+        >
           Take New Quiz
         </button>
       </div>
@@ -81,15 +92,23 @@ const Quiz = () => {
   const currentQuestion = questions[currentQuestionIndex];
 
   return (
-    <div className='card p-4'>
-      <h2>{currentQuestion.question}</h2>
+    <div data-testid="quiz-component" className="card p-4">
+      <h2 data-cy="question-header">{currentQuestion.question}</h2>
       <div className="mt-3">
-      {currentQuestion.answers.map((answer, index) => (
-        <div key={index} className="d-flex align-items-center mb-2">
-          <button className="btn btn-primary" onClick={() => handleAnswerClick(answer.isCorrect)}>{index + 1}</button>
-          <div className="alert alert-secondary mb-0 ms-2 flex-grow-1">{answer.text}</div>
-        </div>
-      ))}
+        {currentQuestion.answers.map((answer, index) => (
+          <div key={index} className="d-flex align-items-center mb-2">
+            <button
+              data-cy="answer-btn"
+              className="btn btn-primary"
+              onClick={() => handleAnswerClick(answer.isCorrect)}
+            >
+              {index + 1}
+            </button>
+            <div className="alert alert-secondary mb-0 ms-2 flex-grow-1">
+              {answer.text}
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
