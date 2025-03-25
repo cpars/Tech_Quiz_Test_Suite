@@ -1,92 +1,52 @@
 [
   {
-    "question": "What is the purpose of React?",
-    "correct_answer": "To build user interfaces",
-    "incorrect_answers": [
-      "To manage databases",
-      "To style web pages",
-      "To build server-side applications"
+    "_id": "1",
+    "question": "What is the purpose of the useEffect hook in React?",
+    "answers": [
+      { "text": "To perform side effects in function components", "isCorrect": true },
+      { "text": "To manage component state", "isCorrect": false },
+      { "text": "To create new components", "isCorrect": false },
+      { "text": "To style components with CSS", "isCorrect": false }
     ]
   },
   {
-    "question": "Which hook is used to manage state in a functional component?",
-    "correct_answer": "useState",
-    "incorrect_answers": [
-      "useEffect",
-      "useContext",
-      "useReducer"
+    "_id": "2",
+    "question": "Which of the following is a valid way to create a React component?",
+    "answers": [
+      { "text": "function MyComponent() {}", "isCorrect": true },
+      { "text": "new React.Component()", "isCorrect": false },
+      { "text": "React.makeComponent()", "isCorrect": false },
+      { "text": "component.create()", "isCorrect": false }
     ]
   },
   {
-    "question": "What is JSX?",
-    "correct_answer": "A syntax extension for JavaScript used in React",
-    "incorrect_answers": [
-      "A templating language",
-      "A new programming language",
-      "A browser extension"
+    "_id": "3",
+    "question": "What does JSX stand for?",
+    "answers": [
+      { "text": "JavaScript XML", "isCorrect": true },
+      { "text": "Java Syntax Extension", "isCorrect": false },
+      { "text": "JSON Syntax Exchange", "isCorrect": false },
+      { "text": "JavaScript Extension", "isCorrect": false }
     ]
   },
   {
-    "question": "Which hook is used for side effects in React?",
-    "correct_answer": "useEffect",
-    "incorrect_answers": [
-      "useRef",
-      "useState",
-      "useCallback"
+    "_id": "4",
+    "question": "Which prop is used to pass data from a parent to a child component?",
+    "answers": [
+      { "text": "props", "isCorrect": true },
+      { "text": "state", "isCorrect": false },
+      { "text": "data", "isCorrect": false },
+      { "text": "context", "isCorrect": false }
     ]
   },
   {
-    "question": "How do you pass data from a parent component to a child component?",
-    "correct_answer": "Via props",
-    "incorrect_answers": [
-      "Via state",
-      "Via useEffect",
-      "Via useContext"
-    ]
-  },
-  {
-    "question": "Which of these is true about keys in React lists?",
-    "correct_answer": "They help identify which items have changed",
-    "incorrect_answers": [
-      "They are used for security",
-      "They store state values",
-      "They define routes"
-    ]
-  },
-  {
-    "question": "What does the useRef hook return?",
-    "correct_answer": "A mutable ref object",
-    "incorrect_answers": [
-      "A stateful value",
-      "An event listener",
-      "A render counter"
-    ]
-  },
-  {
-    "question": "Which hook is used for performance optimization by memoizing functions?",
-    "correct_answer": "useCallback",
-    "incorrect_answers": [
-      "useMemo",
-      "useEffect",
-      "useState"
-    ]
-  },
-  {
-    "question": "How do you create a context in React?",
-    "correct_answer": "Using React.createContext()",
-    "incorrect_answers": [
-      "Using useContext()",
-      "Using createState()",
-      "Using createStore()"
-    ]
-  },
-  {
-    "question": "Which tool is commonly used to manage global state in larger React apps?",
-    "correct_answer": "Redux",
-    "incorrect_answers": [
-      "Jest",
-      "React Router",
-      "WebPack"
+    "_id": "5",
+    "question": "Which hook would you use to reference a DOM element?",
+    "answers": [
+      { "text": "useRef", "isCorrect": true },
+      { "text": "useMemo", "isCorrect": false },
+      { "text": "useState", "isCorrect": false },
+      { "text": "useEffect", "isCorrect": false }
     ]
   }
 ]
